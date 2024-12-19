@@ -13,9 +13,9 @@ class CardCell: UICollectionViewCell {
         let img = UIImageView()
          img.translatesAutoresizingMaskIntoConstraints = false
         img.image = UIImage(named: "cardimg")
-        img.contentMode = .scaleAspectFill
+         img.contentMode = .scaleAspectFill
          img.layer.zPosition = -1
-         
+         img.backgroundColor = .blue
         return img
     }()
     
@@ -73,7 +73,7 @@ class CardCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
             super.init(frame: frame)
-        [cardAzn, cardTime, cardType, cardNumbers, cardimg ].forEach{contentView.addSubview($0)}
+        [cardimg, cardAzn, cardTime, cardType, cardNumbers ].forEach{contentView.addSubview($0)}
             // backgroundColor = .white
             configureConstraint()
         contentView.layer.borderColor = UIColor.clear.cgColor
@@ -87,10 +87,10 @@ class CardCell: UICollectionViewCell {
     
         func configureConstraint() {
             NSLayoutConstraint.activate([
-                cardimg.topAnchor.constraint(equalTo: contentView.topAnchor),
-                cardimg.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-                cardimg.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-                cardimg.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+                cardimg.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+                cardimg.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0),
+                cardimg.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 0),
+                cardimg.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
                 cardTime.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
                 cardTime.heightAnchor.constraint(equalToConstant: 40),
                 cardTime.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
@@ -115,7 +115,7 @@ class CardCell: UICollectionViewCell {
             cardNumbers.text = card.bic
             cardType.text = card.type?.rawValue
             cardTime.text = card.time
-        cardAzn.text = "\(card.azn ?? 0)"
+            cardAzn.text = "\(card.azn ?? 0)"
         }
     
 }

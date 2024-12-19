@@ -10,18 +10,21 @@ import RealmSwift
 
 class RegisterController: BaseViewController {
     let realm = try! Realm()
-   
+    
+    private var ValidationMapping: [UITextField: RegisterViewModel.ValidationType] = [:]
+    var back: ((Register) -> Void)?
+    
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.translatesAutoresizingMaskIntoConstraints = false
         return sv
-      }()
+    }()
     
     private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-      }()
+    }()
     
     private lazy var imageH: UIImageView = {
         let image  = UIImageView()
@@ -43,132 +46,48 @@ class RegisterController: BaseViewController {
         return label
     }()
     
-    private lazy var firstname: UITextField = {
-        let text = UITextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        //text.placeholder = "  First Name"
-       // text.font = UIFont.systemFont(ofSize: 14, weight: .semibold , )
-        text.attributedPlaceholder = NSAttributedString(
-            string: "First Name",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        text.backgroundColor = .white.withAlphaComponent(0.2)
-        text.textColor = .white
-        text.textAlignment = .left
-        text.layer.cornerRadius = 10
-        text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.white.cgColor
-        text.setLeftPadding(10)
+    lazy var firstname: UITextField = {
+        let text = ReusableTextField(placeholder: "First name" , leftPadding: 10)
         text.delegate = self
         return text
     }()
     
-    private lazy var lastname: UITextField = {
-        let text = UITextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        //text.placeholder = "  Last Name"
-        //text.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        text.attributedPlaceholder = NSAttributedString(
-            string: "Last Name",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        text.backgroundColor = .white.withAlphaComponent(0.2)
-        text.textAlignment = .left
-        text.textColor = .white
-        text.layer.cornerRadius = 10
-        text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.white.cgColor
-        text.setLeftPadding(10)
+    lazy var lastname: UITextField = {
+        let text = ReusableTextField(placeholder: "Last name" , leftPadding: 10)
         text.delegate = self
         return text
     }()
-    private lazy var fincode: UITextField = {
-        let text = UITextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        //text.placeholder = "  Enter Name"
-        //text.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        text.attributedPlaceholder = NSAttributedString(
-            string: "Enter FinCode",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        text.backgroundColor = .white.withAlphaComponent(0.2)
-        text.textColor = .white
-        text.textAlignment = .left
-        text.layer.cornerRadius = 10
-        text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.white.cgColor
-        text.setLeftPadding(10)
+    lazy var fincode: UITextField = {
+        let text = ReusableTextField(placeholder: "Fincode" , leftPadding: 10)
         text.delegate = self
         return text
     }()
     
-    private lazy var phone: UITextField = {
-        let text = UITextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        //text.placeholder = "  Enter Phone"
-        //text.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        text.attributedPlaceholder = NSAttributedString(
-            string: "Enter Phone",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        text.backgroundColor = .white.withAlphaComponent(0.2)
-        text.textColor = .white
-        text.textAlignment = .left
-        text.layer.cornerRadius = 10
-        text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.white.cgColor
-        text.setLeftPadding(10)
+    lazy var phone: UITextField = {
+        let text = ReusableTextField(placeholder: "994xx xxx xx xx" , leftPadding: 10)
+        text.delegate = self
+        text.keyboardType = .numberPad
+        return text
+    }()
+    
+    lazy var email: UITextField = {
+        let text = ReusableTextField(placeholder: "Email" , leftPadding: 10)
         text.delegate = self
         return text
     }()
     
-    private lazy var email: UITextField = {
-        let text = UITextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        //text.placeholder = "  Enter Mail"
-        //text.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        text.attributedPlaceholder = NSAttributedString(
-            string: "Enter Mail",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        text.backgroundColor = .white.withAlphaComponent(0.2)
-        text.textColor = .white
-        text.textAlignment = .left
-        text.layer.cornerRadius = 10
-        text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.white.cgColor
-        text.setLeftPadding(10)
-        text.delegate = self
-        return text
-    }()
-    
-    private lazy var password: UITextField = {
-        let text = UITextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        //text.placeholder = "  Enter Password"
-        //text.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        text.attributedPlaceholder = NSAttributedString(
-            string: "Enter Password",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        text.backgroundColor = .white.withAlphaComponent(0.2)
-        text.textColor = .white
-        text.textAlignment = .left
-        text.layer.cornerRadius = 10
-        text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.white.cgColor
-        text.setLeftPadding(10)
+    lazy var password: UITextField = {
+        let text = ReusableTextField(placeholder: "Password" , leftPadding: 10)
         text.delegate = self
         return text
     }()
     
     private lazy var signup: UIButton = {
-        let button = UIButton()
+        let button = Button(title: "Sign up", onAction: {[weak self] in self?.submitSign()})
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Sign Up", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        button.backgroundColor = .white.withAlphaComponent(0.3)
-        button.addTarget(self, action: #selector(submitSign), for: .touchUpInside)
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.white.cgColor
+        
         return button
     }()
-    
     
     private lazy var stack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [firstname , lastname , fincode, phone, email, password])
@@ -196,26 +115,35 @@ class RegisterController: BaseViewController {
         button.backgroundColor = .none
         button.addTarget(self, action: #selector(submitLogin), for: .touchUpInside)
         button.layer.cornerRadius = 10
-       
+        
         button.setUnderlinedTitle("Login" , color: .white)
         return button
     }()
+    
+    private let viewModule: RegisterViewModel
+    init(viewModule: RegisterViewModel) {
+        self.viewModule = viewModule
+        super.init(nibName: nil, bundle: nil)
+        // let realm = try! Realm()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appcolor
         print("Realm is located at:", realm.configuration.fileURL!)
+        setupMapping()
+        configureViewModel()
     }
-
     
     override func configureView(){
-        view.addSubview(imageH)
-        view.addSubview(creat)
-        view.addSubview(signup)
-        view.addSubview(scrollView)
-        view.addSubview(labelLogin)
-        view.addSubview(login)
+        super.configureView()
+        [imageH , creat , signup , scrollView, labelLogin , login].forEach{view.addSubview($0)}
         scrollView.addSubview(contentView)
         contentView.addSubview(stack)
     }
@@ -239,15 +167,15 @@ class RegisterController: BaseViewController {
             scrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
             scrollView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3)
         ]);
-       
-            NSLayoutConstraint.activate([
-              contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-              contentView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
-              contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-              contentView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-              contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-          
-            ]);
+        
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+            
+        ]);
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             stack.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0),
@@ -282,132 +210,92 @@ class RegisterController: BaseViewController {
         ])
     }
     
-    func isValidEmail(email: String)-> Bool{
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
+   private func configureViewModel() {
+        viewModule.listener = { [weak self] state in
+            switch state {
+            case .success(let newUser):
+                self?.back?(newUser)
+                self?.navigationController?.popViewController(animated: true)
+            case .error(let message):
+                self?.showMessage(title: "Error", message: message)
+            default:
+                break
+            }
+        }
     }
     
-    func isValidPhoneNumber( phoneNumber: String) -> Bool {
-        let pattern = "^(050|051|055)\\d{7}$"
-        guard let regex = try? NSRegularExpression(pattern: pattern) else {
-            return false
+    func setupMapping(){
+        ValidationMapping = [
+            email: .email,
+            password: .password,
+            fincode: .fin,
+            lastname: .lastname,
+            phone: .phone,
+            firstname: .firstname
+            
+        ]
+    }
+    
+    private func checkValidation() {
+        
+        let fields: [(UITextField, RegisterViewModel.ValidationType)] = [
+            (firstname, .firstname),
+            (lastname, .lastname),
+            (fincode, .fin),
+            (phone, .phone),
+            (email, .email),
+            (password, .password)
+        ]
+        
+        var isValid = true
+        for (textField, validationType) in fields {
+            guard let text = textField.text, !text.isEmpty else {
+                textField.layer.borderColor = UIColor.red.cgColor
+                isValid = false
+                continue
+            }
+            
+            if viewModule.valueValidationType(value: text, type: validationType) {
+                textField.layer.borderColor = UIColor.green.cgColor
+            } else {
+                textField.layer.borderColor = UIColor.red.cgColor
+                isValid = false
+            }
         }
-        let range = NSRange(location: 0, length: phoneNumber.utf16.count)
-        let matches = regex.matches(in: phoneNumber, options: [], range: range)
-        return !matches.isEmpty
+        
+        if !isValid {
+            showMessage(title: "Error", message: "Please fix the errors in the highlighted fields.")
+            return
+        }
+        
+        guard let name = firstname.text,
+              let lastn = lastname.text,
+              let fin = fincode.text,
+              let phonee = phone.text,
+              let mail = email.text,
+              let pass = password.text else { return }
+        
+        viewModule.saveCustomer(name: name, lastName: lastn, customerID: fin, email: mail, phoneNumber: phonee, password: pass)
     }
     
     @objc private func submitSign(){
-        let user = Register()
-        guard let phn = phone.text , let pass = password.text else {return}
-        user.phoneN = phn
-        user.password = pass
-        
-        try! realm.write({
-            realm.add(user)
-        })
-       
-            let lg = LoginController()
-            navigationController?.pushViewController(lg, animated: true)
-        
-//
-        
+        checkValidation()
     }
     
     @objc
     private func submitLogin(){
-        let lg = LoginController()
-        navigationController?.pushViewController(lg, animated: true)
-        Constants.getName()
+        _ = LoginController(viewModule: LoginViewModule())
+        navigationController?.popViewController(animated: true)
     }
-    
 }
-
-
 
 extension RegisterController: UITextFieldDelegate {
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-       
-//        firstname.layer.borderColor = UIColor.white.cgColor
-//        lastname.layer.borderColor = UIColor.white.cgColor
-//        password.layer.borderColor = UIColor.white.cgColor
-//        email.layer.borderColor = UIColor.white.cgColor
-//        phone.layer.borderColor = UIColor.white.cgColor
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let ismapping = ValidationMapping[textField] else {return}
         
-    }
-    
- func textFieldDidChangeSelection(_ textField: UITextField) {
+        let finish = viewModule.valueValidationType(value: textField.text ?? "", type: ismapping)
         
-        guard let nameF=firstname.text , let nameL=lastname.text ,  let pass=password.text ,  let emaill = email.text , let phonee = phone.text , let finCode = fincode.text else{return}
-        
-        
-        
-        switch textField {
-        case firstname:
-            if nameF.isEmpty || nameF.count<4 {
-                firstname.layer.borderColor = UIColor.red.cgColor
-            }
-            
-            else{
-                firstname.layer.borderColor = UIColor.green.cgColor
-                
-            }
-            
-        case lastname:
-            if nameL.isEmpty || nameL.count<4 {
-                lastname.layer.borderColor = UIColor.red.cgColor
-            }
-            
-            else{
-                lastname.layer.borderColor = UIColor.green.cgColor
-                
-            }
-            
-        case password:
-            if pass.isEmpty || pass.count<8 {
-                password.layer.borderColor = UIColor.red.cgColor
-            }
-            
-            else{
-                password.layer.borderColor = UIColor.green.cgColor
-           
-            }
-            
-        case email:
-                    if !isValidEmail(email: emaill) {
-                        email.layer.borderColor = UIColor.red.cgColor
-                    } else {
-
-                        email.layer.borderColor = UIColor.green.cgColor
-                    }
-                    
-                
-            
-        case phone:
-           
-                if !isValidPhoneNumber(phoneNumber: phonee) {
-                    phone.layer.borderColor = UIColor.red.cgColor
-                } else {
-                    phone.layer.borderColor = UIColor.green.cgColor
-                }
-                
-        case fincode:
-            if finCode.isEmpty || finCode.count<8 {
-                fincode.layer.borderColor = UIColor.red.cgColor
-            }
-            
-            else{
-                fincode.layer.borderColor = UIColor.green.cgColor
-                
-            }
-            
-        default: break
-        }
-        
+        textField.layer.borderColor = finish ? UIColor.green.cgColor : UIColor.red.cgColor
     }
 }
-
-    
-    

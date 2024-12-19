@@ -7,8 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		861761CC2CE50B4E00AB1E74 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861761CB2CE50B4E00AB1E74 /* TabbarController.swift */; };
+		862114CB2CE62A8100B87E4A /* Reusable Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862114CA2CE62A8100B87E4A /* Reusable Button.swift */; };
+		862114CD2CE74BF200B87E4A /* LogoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862114CC2CE74BF200B87E4A /* LogoutController.swift */; };
+		862114D02CE7589A00B87E4A /* UserDefaultHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862114CF2CE7589A00B87E4A /* UserDefaultHelper.swift */; };
+		862114D22CE758A800B87E4A /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862114D12CE758A800B87E4A /* UserDefaultKeys.swift */; };
+		8621892E2CF0A2700088B7F8 /* TransferViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8621892D2CF0A2700088B7F8 /* TransferViewModule.swift */; };
 		867FC2E12CDB8E7500E8B4E0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 867FC2E02CDB8E7500E8B4E0 /* Colors.xcassets */; };
 		867FC2ED2CDB8FCD00E8B4E0 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867FC2EC2CDB8FCD00E8B4E0 /* LoginController.swift */; };
+		869DE6022CEF56DB00E1CF6E /* Reusable Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DE6012CEF56DB00E1CF6E /* Reusable Textfield.swift */; };
+		869DE6042CEF832F00E1CF6E /* TransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DE6032CEF832F00E1CF6E /* TransferController.swift */; };
+		86A82BBD2CF8BD96004828D0 /* FirstCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A82BBC2CF8BD96004828D0 /* FirstCardController.swift */; };
+		86A82BC12CF8BE2E004828D0 /* FirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A82BC02CF8BE2E004828D0 /* FirstCell.swift */; };
 		86C0F0562CDA410800A61EB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0F0552CDA410800A61EB7 /* AppDelegate.swift */; };
 		86C0F0582CDA410800A61EB7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0F0572CDA410800A61EB7 /* SceneDelegate.swift */; };
 		86C0F05A2CDA410800A61EB7 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0F0592CDA410800A61EB7 /* RegisterController.swift */; };
@@ -17,6 +27,13 @@
 		86C0F0742CDA66C700A61EB7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0F0732CDA66C700A61EB7 /* BaseViewController.swift */; };
 		86C0F0762CDA823600A61EB7 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0F0752CDA823600A61EB7 /* Register.swift */; };
 		86C0F07C2CDA861700A61EB7 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0F07B2CDA861700A61EB7 /* Extension.swift */; };
+		86C956292CE3975E000EFD1A /* LoginViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C956282CE3975E000EFD1A /* LoginViewModule.swift */; };
+		86C9562B2CE39C73000EFD1A /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C9562A2CE39C73000EFD1A /* MainController.swift */; };
+		86D86F7C2CECC19400EC76B7 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D86F7B2CECC19400EC76B7 /* CardCell.swift */; };
+		86D86F7F2CECEA0600EC76B7 /* MainViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D86F7E2CECEA0600EC76B7 /* MainViewModule.swift */; };
+		86D86F812CED066500EC76B7 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D86F802CED066500EC76B7 /* Main.swift */; };
+		86D8AE2F2CDF9027006F4183 /* RegisterViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8AE2E2CDF9027006F4183 /* RegisterViewModule.swift */; };
+		86F0861C2CFF5CC8002D8E47 /* FirstViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F0861B2CFF5CC8002D8E47 /* FirstViewModule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,9 +50,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		861761CB2CE50B4E00AB1E74 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
+		862114CA2CE62A8100B87E4A /* Reusable Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reusable Button.swift"; sourceTree = "<group>"; };
+		862114CC2CE74BF200B87E4A /* LogoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutController.swift; sourceTree = "<group>"; };
+		862114CF2CE7589A00B87E4A /* UserDefaultHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHelper.swift; sourceTree = "<group>"; };
+		862114D12CE758A800B87E4A /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
+		8621892D2CF0A2700088B7F8 /* TransferViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewModule.swift; sourceTree = "<group>"; };
 		867FC2E02CDB8E7500E8B4E0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		867FC2EC2CDB8FCD00E8B4E0 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		867FC2EE2CDD30C500E8B4E0 /* BankingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		869DE6012CEF56DB00E1CF6E /* Reusable Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reusable Textfield.swift"; sourceTree = "<group>"; };
+		869DE6032CEF832F00E1CF6E /* TransferController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferController.swift; sourceTree = "<group>"; };
+		86A82BBC2CF8BD96004828D0 /* FirstCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCardController.swift; sourceTree = "<group>"; };
+		86A82BC02CF8BE2E004828D0 /* FirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCell.swift; sourceTree = "<group>"; };
 		86C0F0552CDA410800A61EB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86C0F0572CDA410800A61EB7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		86C0F0592CDA410800A61EB7 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
@@ -44,7 +71,14 @@
 		86C0F0732CDA66C700A61EB7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		86C0F0752CDA823600A61EB7 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		86C0F07B2CDA861700A61EB7 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		86C956282CE3975E000EFD1A /* LoginViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModule.swift; sourceTree = "<group>"; };
+		86C9562A2CE39C73000EFD1A /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		86CDC37F2CDE214400DCD5FA /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		86D86F7B2CECC19400EC76B7 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		86D86F7E2CECEA0600EC76B7 /* MainViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModule.swift; sourceTree = "<group>"; };
+		86D86F802CED066500EC76B7 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		86D8AE2E2CDF9027006F4183 /* RegisterViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModule.swift; sourceTree = "<group>"; };
+		86F0861B2CFF5CC8002D8E47 /* FirstViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		862114CE2CE7586F00B87E4A /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				862114CF2CE7589A00B87E4A /* UserDefaultHelper.swift */,
+				862114D12CE758A800B87E4A /* UserDefaultKeys.swift */,
+			);
+			path = UserDefault;
+			sourceTree = "<group>";
+		};
 		867FC2DE2CDB8E1D00E8B4E0 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +123,7 @@
 		867FC2E22CDB8E9200E8B4E0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				862114CE2CE7586F00B87E4A /* UserDefault */,
 				867FC2E32CDB8E9B00E8B4E0 /* Extensions */,
 			);
 			path = Helpers;
@@ -98,6 +142,7 @@
 			children = (
 				867FC2E62CDB8EE600E8B4E0 /* Core */,
 				867FC2E92CDB8F0A00E8B4E0 /* Auth */,
+				86D86F782CECB85400EC76B7 /* Main */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -113,7 +158,8 @@
 		867FC2E92CDB8F0A00E8B4E0 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				867FC2EA2CDB8F3800E8B4E0 /* Controllers */,
+				86D8AE2D2CDF8FF8006F4183 /* ViewModules */,
+				86D8AE2C2CDF8F9F006F4183 /* Views */,
 				867FC2EB2CDB8F4000E8B4E0 /* Models */,
 			);
 			path = Auth;
@@ -124,6 +170,7 @@
 			children = (
 				86C0F0592CDA410800A61EB7 /* RegisterController.swift */,
 				867FC2EC2CDB8FCD00E8B4E0 /* LoginController.swift */,
+				861761CB2CE50B4E00AB1E74 /* TabbarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -132,8 +179,27 @@
 			isa = PBXGroup;
 			children = (
 				86C0F0752CDA823600A61EB7 /* Register.swift */,
+				862114CA2CE62A8100B87E4A /* Reusable Button.swift */,
+				869DE6012CEF56DB00E1CF6E /* Reusable Textfield.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		86A82BBB2CF8BBD0004828D0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				86D86F802CED066500EC76B7 /* Main.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		86A82BC62CF8CF78004828D0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				86D86F7B2CECC19400EC76B7 /* CardCell.swift */,
+				86A82BC02CF8BE2E004828D0 /* FirstCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		86C0F0492CDA410800A61EB7 = {
@@ -155,6 +221,63 @@
 				86CDC37F2CDE214400DCD5FA /* Launch Screen.storyboard */,
 			);
 			path = BankingApp;
+			sourceTree = "<group>";
+		};
+		86D86F782CECB85400EC76B7 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				86A82BBB2CF8BBD0004828D0 /* Models */,
+				86D86F7D2CECE9E800EC76B7 /* ViewModule */,
+				86D86F792CECBED700EC76B7 /* Views */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		86D86F792CECBED700EC76B7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				86A82BC62CF8CF78004828D0 /* Cells */,
+				86D86F7A2CECBEE600EC76B7 /* Controllers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		86D86F7A2CECBEE600EC76B7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				862114CC2CE74BF200B87E4A /* LogoutController.swift */,
+				86C9562A2CE39C73000EFD1A /* MainController.swift */,
+				869DE6032CEF832F00E1CF6E /* TransferController.swift */,
+				86A82BBC2CF8BD96004828D0 /* FirstCardController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		86D86F7D2CECE9E800EC76B7 /* ViewModule */ = {
+			isa = PBXGroup;
+			children = (
+				86D86F7E2CECEA0600EC76B7 /* MainViewModule.swift */,
+				8621892D2CF0A2700088B7F8 /* TransferViewModule.swift */,
+				86F0861B2CFF5CC8002D8E47 /* FirstViewModule.swift */,
+			);
+			path = ViewModule;
+			sourceTree = "<group>";
+		};
+		86D8AE2C2CDF8F9F006F4183 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				867FC2EA2CDB8F3800E8B4E0 /* Controllers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		86D8AE2D2CDF8FF8006F4183 /* ViewModules */ = {
+			isa = PBXGroup;
+			children = (
+				86D8AE2E2CDF9027006F4183 /* RegisterViewModule.swift */,
+				86C956282CE3975E000EFD1A /* LoginViewModule.swift */,
+			);
+			path = ViewModules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,10 +357,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86D86F812CED066500EC76B7 /* Main.swift in Sources */,
+				862114CB2CE62A8100B87E4A /* Reusable Button.swift in Sources */,
+				86F0861C2CFF5CC8002D8E47 /* FirstViewModule.swift in Sources */,
+				86A82BC12CF8BE2E004828D0 /* FirstCell.swift in Sources */,
+				86C9562B2CE39C73000EFD1A /* MainController.swift in Sources */,
+				862114D02CE7589A00B87E4A /* UserDefaultHelper.swift in Sources */,
+				86D86F7C2CECC19400EC76B7 /* CardCell.swift in Sources */,
 				86C0F05A2CDA410800A61EB7 /* RegisterController.swift in Sources */,
+				86C956292CE3975E000EFD1A /* LoginViewModule.swift in Sources */,
+				862114D22CE758A800B87E4A /* UserDefaultKeys.swift in Sources */,
+				86A82BBD2CF8BD96004828D0 /* FirstCardController.swift in Sources */,
+				869DE6042CEF832F00E1CF6E /* TransferController.swift in Sources */,
+				86D86F7F2CECEA0600EC76B7 /* MainViewModule.swift in Sources */,
+				86D8AE2F2CDF9027006F4183 /* RegisterViewModule.swift in Sources */,
+				861761CC2CE50B4E00AB1E74 /* TabbarController.swift in Sources */,
 				86C0F0742CDA66C700A61EB7 /* BaseViewController.swift in Sources */,
 				86C0F0562CDA410800A61EB7 /* AppDelegate.swift in Sources */,
+				869DE6022CEF56DB00E1CF6E /* Reusable Textfield.swift in Sources */,
+				862114CD2CE74BF200B87E4A /* LogoutController.swift in Sources */,
 				86C0F07C2CDA861700A61EB7 /* Extension.swift in Sources */,
+				8621892E2CF0A2700088B7F8 /* TransferViewModule.swift in Sources */,
 				86C0F0582CDA410800A61EB7 /* SceneDelegate.swift in Sources */,
 				86C0F0762CDA823600A61EB7 /* Register.swift in Sources */,
 				867FC2ED2CDB8FCD00E8B4E0 /* LoginController.swift in Sources */,

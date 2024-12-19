@@ -16,6 +16,4 @@ class Card: Object {
     @Persisted var time: String?
     @Persisted var azn: Int?
     @Persisted var type: Type?
-    
-  
 }

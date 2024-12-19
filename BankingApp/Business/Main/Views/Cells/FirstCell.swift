@@ -30,7 +30,8 @@ class FirstCell: UITableViewCell {
     }
     
     func configureCell(model: Card){
-        cardView.text = "\(model.bic ?? "") - \(model.azn ?? 0) "
+       
+       cardView.text = "\(model.bic ?? "") - \(model.azn ?? 0) "
      
     }
     

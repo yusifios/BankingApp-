@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LogoutController.swift
 //  BankingApp
 //
 //  Created by Yusıf Aqakerımov on 15.11.24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LogoutController: UIViewController {
     
     private lazy var trButton: UIButton = {
         let button = Button(title: "Log out", onAction: {[weak self] in self?.logout()})

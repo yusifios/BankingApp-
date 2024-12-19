@@ -40,34 +40,12 @@ class LoginController: BaseViewController {
     }()
     
     private lazy var phoneNum: UITextField = {
-        let text = UITextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.attributedPlaceholder = NSAttributedString(
-            string: "Enter Phone",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        text.backgroundColor = .white.withAlphaComponent(0.2)
-        text.textColor = .white
-        text.textAlignment = .left
-        text.layer.cornerRadius = 10
-        text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.white.cgColor
-        text.setLeftPadding(10)
+        let text = ReusableTextField(placeholder: "First name" , leftPadding: 10)
         return text
     }()
     
     private lazy var password: UITextField = {
-        let text = UITextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text.attributedPlaceholder = NSAttributedString(
-            string: "Enter Password",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        text.backgroundColor = .white.withAlphaComponent(0.2)
-        text.textColor = .white
-        text.textAlignment = .left
-        text.layer.cornerRadius = 10
-        text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.white.cgColor
-        text.setLeftPadding(10)
+        let text = ReusableTextField(placeholder: "Password" , leftPadding: 10)
         return text
     }()
     
@@ -80,22 +58,16 @@ class LoginController: BaseViewController {
     }()
     
     private lazy var signin: UIButton = {
-        let button = UIButton()
+        let button = Button(title: "Sign in", onAction: {[weak self] in self?.signIn()})
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Sign in", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        button.backgroundColor = .white.withAlphaComponent(0.3)
-        button.addTarget(self, action: #selector(signIn), for: .touchUpInside)
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.white.cgColor
+        
         return button
     }()
     
     private lazy var labelregister: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Senin Linkedinin yoxdu, sen nece devlopersen?"
+        label.text = "Don't have an account?"
         label.textAlignment = .right
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
@@ -115,22 +87,27 @@ class LoginController: BaseViewController {
         return button
     }()
     
+    private let viewModule: LoginViewModule
+    init(viewModule: LoginViewModule) {
+        self.viewModule = viewModule
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appcolor
+        UserDefaultsHelper.setInteger(key: UserDefaultsKey.loginType.rawValue, value: 0)
     }
     
     override func configureView() {
-        view.addSubview(imageH)
-        view.addSubview(scrollView)
+        [imageH , imageF , signin , scrollView, labelregister , register].forEach{view.addSubview($0)}
         scrollView.addSubview(contentView)
         contentView.addSubview(stack)
-        view.addSubview(imageF)
-        view.addSubview(signin)
-        view.addSubview(register)
-        view.addSubview(labelregister)
-        
     }
     
     override func configureConstraint() {
@@ -171,7 +148,7 @@ class LoginController: BaseViewController {
             password.heightAnchor.constraint(equalToConstant: 40),
         ])
         NSLayoutConstraint.activate([
-            signin.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 2),
+            signin.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 20),
             signin.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8),
             signin.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
             signin.heightAnchor.constraint(equalToConstant: 40)
@@ -185,7 +162,7 @@ class LoginController: BaseViewController {
         ]);
         NSLayoutConstraint.activate([
             register.topAnchor.constraint(equalTo: signin.bottomAnchor, constant: 12),
-            register.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 160),
+            register.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 90),
             register.heightAnchor.constraint(equalToConstant: 40)
             
         ])
@@ -193,11 +170,24 @@ class LoginController: BaseViewController {
     
     @objc
     private func signIn(){
-        
+        guard let username = phoneNum.text, let password = password.text else {return}
+        if viewModule.checkuserNameandPassword(username: username, password: password) {
+            let vg = TabBarController()
+            navigationController?.pushViewController(vg, animated: true)
+        }
     }
+    
     @objc
     private func sumbitregister(){
-        let rg = RegisterController()
+        let rg = RegisterController(viewModule: RegisterViewModel())
+        rg.back = {[weak self] data in
+            self?.setLoginDetails(username: data.username ?? "", password: data.password ?? "")
+        }
         navigationController?.pushViewController(rg, animated: true)
+    }
+    
+    func setLoginDetails(username: String, password: String) {
+        phoneNum.text = username
+        self.password.text = password
     }
 }

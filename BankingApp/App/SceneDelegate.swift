@@ -10,26 +10,64 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-
+    //    private var loginType = UserDefaultsHelper.getInteger(key: "LoginType")
+    private var loginType = UserDefaultsHelper.getInteger(key: UserDefaultsKey.loginType.rawValue)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        let newWindow = UIWindow(windowScene: windowScene)
-        
-        let controller = RegisterController()
-        let navController = UINavigationController(rootViewController: controller)
-       
-        newWindow.rootViewController = navController
+        start(scene: windowScene)
+        guard let _ = (scene as? UIWindowScene) else { return }
+    }
+    fileprivate func start(scene: UIWindowScene) {
+        var newWindow: UIWindow?
+        switch loginType {
+        case 0:
+            newWindow = showLogin(scene: scene)
+        default:
+            newWindow = showTabbar(scene: scene)
+        }
         window = newWindow
         window?.makeKeyAndVisible()
+        
     }
+    
+    private func showLogin(scene: UIWindowScene) -> UIWindow {
+        let controller = LoginController(viewModule: LoginViewModule())
+        let navigationController = UINavigationController(rootViewController: controller)
+        let newWindow = UIWindow(windowScene: scene)
+        navigationController.navigationBar.isHidden = true
+        
 
+        newWindow.rootViewController = navigationController
+        return newWindow
+    }
+    
+    private func showTabbar(scene: UIWindowScene) -> UIWindow {
+        let controller = TabBarController()
+        let navigationController = UINavigationController(rootViewController: controller)
+        navigationController.navigationBar.isHidden = false
+        let newWindow = UIWindow(windowScene: scene)
+        newWindow.rootViewController = navigationController
+        return newWindow
+    }
+ 
+
+    func switchToLogin() {
+        guard let windowScene = window?.windowScene else { return }
+        window = showLogin(scene: windowScene)
+        window?.makeKeyAndVisible()
+    }
+    
+    func switchToTabbar() {
+        guard let windowScene = window?.windowScene else { return }
+        window = showTabbar(scene: windowScene)
+        window?.makeKeyAndVisible()
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+        // The scene may re-connect later, as its session was not necessarily discarded (see ⁠ application:didDiscardSceneSessions ⁠ instead).
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -55,4 +93,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-
