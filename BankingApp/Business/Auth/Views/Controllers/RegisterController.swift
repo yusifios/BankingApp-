@@ -10,7 +10,7 @@ import RealmSwift
 
 class RegisterController: BaseViewController {
     let realm = try! Realm()
-    
+   
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.translatesAutoresizingMaskIntoConstraints = false
@@ -58,8 +58,10 @@ class RegisterController: BaseViewController {
         text.layer.borderWidth = 1
         text.layer.borderColor = UIColor.white.cgColor
         text.setLeftPadding(10)
+        text.delegate = self
         return text
     }()
+    
     private lazy var lastname: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
@@ -75,6 +77,7 @@ class RegisterController: BaseViewController {
         text.layer.borderWidth = 1
         text.layer.borderColor = UIColor.white.cgColor
         text.setLeftPadding(10)
+        text.delegate = self
         return text
     }()
     private lazy var fincode: UITextField = {
@@ -92,6 +95,7 @@ class RegisterController: BaseViewController {
         text.layer.borderWidth = 1
         text.layer.borderColor = UIColor.white.cgColor
         text.setLeftPadding(10)
+        text.delegate = self
         return text
     }()
     
@@ -110,6 +114,7 @@ class RegisterController: BaseViewController {
         text.layer.borderWidth = 1
         text.layer.borderColor = UIColor.white.cgColor
         text.setLeftPadding(10)
+        text.delegate = self
         return text
     }()
     
@@ -128,6 +133,7 @@ class RegisterController: BaseViewController {
         text.layer.borderWidth = 1
         text.layer.borderColor = UIColor.white.cgColor
         text.setLeftPadding(10)
+        text.delegate = self
         return text
     }()
     
@@ -146,6 +152,7 @@ class RegisterController: BaseViewController {
         text.layer.borderWidth = 1
         text.layer.borderColor = UIColor.white.cgColor
         text.setLeftPadding(10)
+        text.delegate = self
         return text
     }()
     
@@ -275,25 +282,132 @@ class RegisterController: BaseViewController {
         ])
     }
     
+    func isValidEmail(email: String)-> Bool{
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+    
+    func isValidPhoneNumber( phoneNumber: String) -> Bool {
+        let pattern = "^(050|051|055)\\d{7}$"
+        guard let regex = try? NSRegularExpression(pattern: pattern) else {
+            return false
+        }
+        let range = NSRange(location: 0, length: phoneNumber.utf16.count)
+        let matches = regex.matches(in: phoneNumber, options: [], range: range)
+        return !matches.isEmpty
+    }
+    
     @objc private func submitSign(){
         let user = Register()
-        guard let name = firstname.text , let pass = password.text else {return}
-        user.username = name
+        guard let phn = phone.text , let pass = password.text else {return}
+        user.phoneN = phn
         user.password = pass
         
         try! realm.write({
             realm.add(user)
         })
+       
+            let lg = LoginController()
+            navigationController?.pushViewController(lg, animated: true)
         
-        let lg = LoginController()
-        navigationController?.pushViewController(lg, animated: true)
+//
+        
     }
     
     @objc
     private func submitLogin(){
         let lg = LoginController()
         navigationController?.pushViewController(lg, animated: true)
+        Constants.getName()
     }
     
 }
 
+
+
+extension RegisterController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+       
+//        firstname.layer.borderColor = UIColor.white.cgColor
+//        lastname.layer.borderColor = UIColor.white.cgColor
+//        password.layer.borderColor = UIColor.white.cgColor
+//        email.layer.borderColor = UIColor.white.cgColor
+//        phone.layer.borderColor = UIColor.white.cgColor
+        
+    }
+    
+ func textFieldDidChangeSelection(_ textField: UITextField) {
+        
+        guard let nameF=firstname.text , let nameL=lastname.text ,  let pass=password.text ,  let emaill = email.text , let phonee = phone.text , let finCode = fincode.text else{return}
+        
+        
+        
+        switch textField {
+        case firstname:
+            if nameF.isEmpty || nameF.count<4 {
+                firstname.layer.borderColor = UIColor.red.cgColor
+            }
+            
+            else{
+                firstname.layer.borderColor = UIColor.green.cgColor
+                
+            }
+            
+        case lastname:
+            if nameL.isEmpty || nameL.count<4 {
+                lastname.layer.borderColor = UIColor.red.cgColor
+            }
+            
+            else{
+                lastname.layer.borderColor = UIColor.green.cgColor
+                
+            }
+            
+        case password:
+            if pass.isEmpty || pass.count<8 {
+                password.layer.borderColor = UIColor.red.cgColor
+            }
+            
+            else{
+                password.layer.borderColor = UIColor.green.cgColor
+           
+            }
+            
+        case email:
+                    if !isValidEmail(email: emaill) {
+                        email.layer.borderColor = UIColor.red.cgColor
+                    } else {
+
+                        email.layer.borderColor = UIColor.green.cgColor
+                    }
+                    
+                
+            
+        case phone:
+           
+                if !isValidPhoneNumber(phoneNumber: phonee) {
+                    phone.layer.borderColor = UIColor.red.cgColor
+                } else {
+                    phone.layer.borderColor = UIColor.green.cgColor
+                }
+                
+        case fincode:
+            if finCode.isEmpty || finCode.count<8 {
+                fincode.layer.borderColor = UIColor.red.cgColor
+            }
+            
+            else{
+                fincode.layer.borderColor = UIColor.green.cgColor
+                
+            }
+            
+        default: break
+        }
+        
+    }
+}
+
+    
+    
